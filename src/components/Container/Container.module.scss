@@ -12,6 +12,8 @@
         flex-direction: column;
 
         >div {
+            display: flex;
+            flex-direction: row;
             margin: 10px auto 0;
         }
     }

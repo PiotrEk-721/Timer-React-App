@@ -9,23 +9,33 @@ function App() {
   const [previousElapsedMs, setPreviousElapsedMs] = useState(0);
   const startTimeRef = useRef(null);
 
-  const formatTime = (ms) => {
+  const formatTimeMs = (ms) => {
     const milliseconds = ms % 1000;
+
+    return String(milliseconds).padStart(3, '0');
+  };
+
+  const formatTimeSec = (ms) => {
     const totalSeconds = Math.floor(ms / 1000);
     const seconds = totalSeconds % 60;
+
+    return String(seconds).padStart(2, '0');
+  };
+
+  const formatTimeMin = (ms) => {
+    const totalSeconds = Math.floor(ms / 1000);
     const totalMinutes = Math.floor(totalSeconds / 60);
     const minutes = totalMinutes % 60;
+
+    return String(minutes).padStart(2, '0');
+  };
+
+  const formatTimeHour = (ms) => {
+    const totalSeconds = Math.floor(ms / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
     const hours = Math.floor(totalMinutes / 60);
 
-    return (
-      String(hours).padStart(2, '0') +
-      ':' +
-      String(minutes).padStart(2, '0') +
-      ':' +
-      String(seconds).padStart(2, '0') +
-      '.' +
-      String(milliseconds).padStart(3, '0')
-    );
+    return String(hours).padStart(2, '0');
   };
 
   const start = () => {
@@ -61,7 +71,15 @@ function App() {
     <div>
       <Container>
         <div>
-          <Stopwatch formatedTimeInMilisecond={formatTime(elapsedMs)} />
+          <div>
+            <Stopwatch formatedTimeInMilisecond={formatTimeHour(elapsedMs)} />
+            <h2>:</h2>
+            <Stopwatch formatedTimeInMilisecond={formatTimeMin(elapsedMs)} />
+            <h2>:</h2>
+            <Stopwatch formatedTimeInMilisecond={formatTimeSec(elapsedMs)} />
+            <h2>:</h2>
+            <Stopwatch formatedTimeInMilisecond={formatTimeMs(elapsedMs)} />
+          </div>
           <div>
             <Button onClick={start}>Start</Button>
             <Button onClick={stop}>Stop</Button>

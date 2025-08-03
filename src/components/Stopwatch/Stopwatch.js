@@ -1,7 +1,9 @@
-const Stopwatch = ({ formatedTimeInMilisecond }) => {
+import styles from './Stopwatch.module.scss';
+
+const Stopwatch = ({ formatedTimeInMilisecond, style }) => {
   return (
-    <div>
-      <h1>{formatedTimeInMilisecond}</h1>
+    <div className={styles.divSize} style={style}>
+      <h2>{formatedTimeInMilisecond}</h2>
     </div>
   );
 };
