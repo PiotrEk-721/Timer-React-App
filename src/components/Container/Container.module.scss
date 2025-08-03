@@ -1,0 +1,18 @@
+@import '../../styles/settings.scss';
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 100px 0 0 0;
+    display: flex;
+    justify-content: center;
+
+    >div {
+        display: flex;
+        flex-direction: column;
+
+        >div {
+            margin: 10px auto 0;
+        }
+    }
+}
