@@ -6,6 +6,7 @@ import Button from './components/Button/Button.js';
 function App() {
   const [elapsedMs, setElapsedMs] = useState(0);
   const [timerId, setTimerId] = useState(null);
+  const [previousElapsedMs, setPreviousElapsedMs] = useState(0);
   const startTimeRef = useRef(null);
 
   const formatTime = (ms) => {
@@ -31,7 +32,7 @@ function App() {
     if (!timerId) {
       startTimeRef.current = Date.now();
       const id = setInterval(() => {
-        setElapsedMs(Date.now() - startTimeRef.current);
+        setElapsedMs(previousElapsedMs + (Date.now() - startTimeRef.current));
       }, 1);
       setTimerId(id);
     }
@@ -41,6 +42,7 @@ function App() {
     if (timerId) {
       clearInterval(timerId);
       setTimerId(null);
+      setPreviousElapsedMs(elapsedMs);
     }
   };
 
